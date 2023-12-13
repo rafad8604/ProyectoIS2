@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>SportyTreasure</title>
+    <link rel="stylesheet" th:href="@{/css/estacion.css}">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <section class="logo">
+                <img th:src="@{/assets/imgLogo.png}" alt="Logo">
+                <h1>SportyTreasure</h1>
+            </section>
+            <ul>
+                <li><a th:href="@{/login}">Cerrar Sesión</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <article>
+            <h2 id="nombre"></h2>
+            <img th:src="@{/assets/villaOlimpicaAcacias.JPG}" alt="imagenx">
+            <p id="descripcion"></p>
+            <a class="button" th:href="@{/actividad}" id="irActividad">Actividad</a>
+        </article>
+
+    </main>
+    <script>
+        contador=0
+        document.addEventListener("DOMContentLoaded", async () => {
+            try {
+                contador+=1;
+                const response = await fetch(`/estaciones/${contador}`);
+                const data = await response.json();
+
+                // Actualizar los elementos HTML con los datos del backend
+                console.log(data)
+                document.getElementById("nombre").innerText = data.nombre;
+                document.getElementById("descripcion").innerText = data.descripcion;
+            } catch (error) {
+                console.error("Error al obtener datos desde el backend:", error);
+            }
+        });
+    </script>
+</body>
+
+</html>

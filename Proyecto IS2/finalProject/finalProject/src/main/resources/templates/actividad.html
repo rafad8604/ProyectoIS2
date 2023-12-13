@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SportyTreasure</title>
+</head>
+<body>
+    <mian>
+        <article>
+            <h2 id="nombre">Desbloqueaste una nueva Actividad!</h2>
+            <p id="descripcion"></p>
+            <div id="actividad"></div>
+            <a class="button" th:href="@{/home}" id="irActividad">Volver</a>
+        </article>
+    </mian>
+    <script>
+        console.log("WHAT?")
+        contador=0;
+        document.addEventListener("DOMContentLoaded", async () => {
+            try {
+                console.log("entrojaja");
+                contador+=1;
+                const response = await fetch(`/actividades/${contador}`);
+                const data = await response.json();
+                console.log("entrojaja2");
+
+                // Actualizar los elementos HTML con los datos del backend
+                console.log(data)
+                document.getElementById("descripcion").innerText = data.descripcion;
+                document.getElementById("actividad").innerHTML = data.actividad;
+            } catch (error) {
+                console.error("Error al obtener datos desde el backend:", error);
+            }
+        });
+    </script>
+</body>
+</html>
